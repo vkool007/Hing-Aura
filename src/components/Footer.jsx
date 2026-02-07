@@ -82,11 +82,15 @@ const Footer = () => {
                         </li>
                         <li style={{ marginBottom: '1rem', display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
                             <Phone size={18} color="var(--color-primary)" />
-                            <span>+91 98765 43210</span>
+                            <span>+91 88824 61078</span>
                         </li>
                         <li style={{ marginBottom: '1rem', display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
                             <Mail size={18} color="var(--color-primary)" />
                             <span>contact@hingaura.com</span>
+                        </li>
+                        <li style={{ marginBottom: '1rem', display: 'flex', gap: '0.8rem', alignItems: 'center' }}>
+                            <span style={{ fontSize: '0.9rem', color: 'var(--color-primary)', fontWeight: '600' }}>Contact Person:</span>
+                            <span style={{ fontSize: '0.9rem' }}>Prashant Sharma</span>
                         </li>
                     </ul>
                 </div>

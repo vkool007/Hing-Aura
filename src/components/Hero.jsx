@@ -8,8 +8,8 @@ const Hero = ({ onOrderClick }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            // Fallback elegant gradient since image generation failed/is pending
-            background: 'radial-gradient(circle at center, #FFF8E1 0%, #F5F5F5 100%)',
+            // Clean elegant gradient for maximum readability
+            background: 'radial-gradient(circle at center, #FFF8E1 0%, #FFFFFF 100%)',
             padding: '0 2rem',
             position: 'relative',
             overflow: 'hidden'

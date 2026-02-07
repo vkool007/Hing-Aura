@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, ShoppingBag } from 'lucide-react';
 
-const ProductCard = ({ title, weight, price, delay, onOrder }) => (
+const ProductCard = ({ title, weight, price, delay, image, onOrder }) => (
     <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -22,49 +22,38 @@ const ProductCard = ({ title, weight, price, delay, onOrder }) => (
         }}
     >
         <div style={{
-            height: '260px',
-            backgroundColor: '#FAFAFA',
+            height: '280px',
+            backgroundColor: '#fff',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             position: 'relative',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            padding: '1rem'
         }}>
             {/* Background decoration in image area */}
             <div style={{
                 position: 'absolute',
                 width: '150%',
                 height: '150%',
-                background: 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(0,0,0,0) 70%)',
+                background: 'radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(0,0,0,0) 70%)',
                 top: '-25%',
                 left: '-25%'
             }}></div>
 
-            {/* Placeholder for Product Image - Styled to look premium */}
-            <motion.div
+            <motion.img
+                src={image}
+                alt={title}
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
                 style={{
-                    width: '140px',
-                    height: '180px',
-                    background: 'linear-gradient(135deg, #FFD700 0%, #F4C430 100%)',
-                    borderRadius: '12px',
-                    boxShadow: '0 15px 30px rgba(0,0,0,0.15)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#fff',
-                    fontWeight: 'bold',
-                    textShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                    maxHeight: '100%',
+                    maxWidth: '100%',
+                    objectFit: 'contain',
                     zIndex: 1,
-                    flexDirection: 'column',
-                    gap: '0.5rem',
-                    border: '1px solid rgba(255,255,255,0.4)'
+                    filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))'
                 }}
-            >
-                <span style={{ fontSize: '2.5rem' }}>✨</span>
-                <span style={{ fontSize: '1.2rem' }}>{weight}</span>
-            </motion.div>
+            />
         </div>
 
         <div style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -124,9 +113,9 @@ const ProductCard = ({ title, weight, price, delay, onOrder }) => (
 
 const ProductShowcase = ({ onOrderClick }) => {
     const products = [
-        { title: 'Royal Hing', weight: '25g', price: 199, delay: 0 },
-        { title: 'Premium Hing', weight: '50g', price: 349, delay: 0.2 },
-        { title: 'Classic Hing', weight: '100g', price: 649, delay: 0.4 },
+        { title: 'Royal Hing', weight: '25g', price: 199, delay: 0, image: '/src/assets/royal_25g.png' },
+        { title: 'Premium Hing', weight: '50g', price: 349, delay: 0.2, image: '/src/assets/premium_50g.png' },
+        { title: 'Classic Hing', weight: '100g', price: 649, delay: 0.4, image: '/src/assets/classic_100g.png' },
     ];
 
     return (
