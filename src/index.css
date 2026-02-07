@@ -1,0 +1,100 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Rozha+One&display=swap');
+
+:root {
+  /* Premium Light Theme Palette */
+  --color-primary: #D4AF37;
+  /* Gold - Luxury Accents */
+  --color-secondary: #4B3621;
+  /* Deep Wood/Spice - Headings */
+  --color-background: #FFF8E1;
+  /* Rich Cream - Background */
+  --color-surface: #FFFFFF;
+  /* White - Cards/Sections */
+  --color-accent: #C0392B;
+  /* Spice Red - Validation/Highlights */
+
+  --color-text-main: #2C2C2C;
+  /* Charcoal - Body Text */
+  --color-text-muted: #6D4C41;
+  /* Muted Brown - Subtitles */
+
+  --color-border: rgba(212, 175, 55, 0.3);
+  /* Gold border */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  /* Typography */
+  --font-heading: 'Rozha One', serif;
+  --font-body: 'Hind', sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+
+  /* Transitions */
+  --transition-fast: 0.3s ease;
+  --transition-smooth: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shadows */
+  --shadow-soft: 0 10px 30px rgba(75, 54, 33, 0.08);
+  --shadow-hover: 0 15px 40px rgba(75, 54, 33, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--color-secondary);
+  font-weight: 400;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  border: none;
+  outline: none;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D7CCC8;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
