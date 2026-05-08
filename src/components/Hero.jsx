@@ -1,155 +1,88 @@
 import React from 'react';
+import { ArrowDown, BadgeCheck, MessageCircle, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import hingPackFront from '../assets/hing1.jpeg';
+import hingPackBack from '../assets/hing2.jpeg';
 
 const Hero = ({ onOrderClick }) => {
     return (
-        <section id="home" style={{
-            minHeight: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            // Clean elegant gradient for maximum readability
-            background: 'radial-gradient(circle at center, #FFF8E1 0%, #FFFFFF 100%)',
-            padding: '0 2rem',
-            position: 'relative',
-            overflow: 'hidden'
-        }}>
-            {/* Decorative Elements - Abstract Spice Interpretation */}
-            <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
-                style={{
-                    position: 'absolute',
-                    top: '-20%',
-                    right: '-10%',
-                    width: '60vw',
-                    height: '60vw',
-                    border: '1px solid rgba(212, 175, 55, 0.1)',
-                    borderRadius: '50%',
-                    pointerEvents: 'none'
-                }}
-            />
-            <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-                style={{
-                    position: 'absolute',
-                    bottom: '-20%',
-                    left: '-10%',
-                    width: '50vw',
-                    height: '50vw',
-                    border: '1px solid rgba(75, 54, 33, 0.05)',
-                    borderRadius: '50%',
-                    pointerEvents: 'none'
-                }}
-            />
+        <section id="home" className="hero hero-modern">
+            <div className="hero-glow hero-glow-one" />
+            <div className="hero-glow hero-glow-two" />
 
-            <div className="hero-content" style={{
-                textAlign: 'center',
-                maxWidth: '900px',
-                zIndex: 1
-            }}>
-                <motion.span
-                    initial={{ opacity: 0, y: 20 }}
+            <div className="section-shell hero-grid">
+                <motion.div
+                    className="hero-content"
+                    initial={{ opacity: 0, y: 28 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    style={{
-                        display: 'block',
-                        fontSize: '1.4rem',
-                        color: 'var(--color-primary)',
-                        marginBottom: '1rem',
-                        fontWeight: '600',
-                        letterSpacing: '4px',
-                        textTransform: 'uppercase'
-                    }}
+                    transition={{ duration: 0.7 }}
                 >
-                    Mystery of Health with Taste
-                </motion.span>
+                    <span className="hero-kicker">
+                        <Sparkles size={16} />
+                        Premium Dana Heeng
+                    </span>
+                    <h1 className="hero-title">
+                        A modern heeng brand for everyday Indian kitchens.
+                    </h1>
+                    <p className="hero-copy">
+                        Premium Quality Compounded “Dana Heeng” with refined presentation, bold aroma, and one-tap WhatsApp booking.
+                    </p>
 
-                <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    style={{
-                        fontSize: 'clamp(3.5rem, 8vw, 7rem)',
-                        color: 'var(--color-secondary)',
-                        marginBottom: '2rem',
-                        lineHeight: 1.1,
-                    }}
-                >
-                    हींग-<span style={{ color: 'var(--color-primary)' }}>Aura</span>
-                </motion.h1>
+                    <div className="hero-actions">
+                        <button className="btn btn-primary" onClick={onOrderClick}>
+                            <MessageCircle size={20} />
+                            Book on WhatsApp
+                        </button>
+                        <a className="btn btn-outline-dark" href="#products">
+                            <ArrowDown size={20} />
+                            See Product
+                        </a>
+                    </div>
 
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    style={{
-                        fontSize: 'clamp(1.1rem, 2vw, 1.4rem)',
-                        color: 'var(--color-text-muted)',
-                        marginBottom: '3rem',
-                        maxWidth: '650px',
-                        margin: '0 auto 3.5rem',
-                        lineHeight: '1.8'
-                    }}
-                >
-                    Experience the ancient secret of purity. Elevate your culinary creations with the finest, most aromatic Asafoetida.
-                </motion.p>
+                    <div className="hero-metrics">
+                        <div>
+                            <strong>₹340</strong>
+                            <span>Current price</span>
+                        </div>
+                        <div>
+                            <strong>FSSAI</strong>
+                            <span>22725143000306</span>
+                        </div>
+                        <div>
+                            <strong>Hathras</strong>
+                            <span>UP 204101</span>
+                        </div>
+                    </div>
+                </motion.div>
 
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                    style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center' }}
+                    className="hero-product-stage"
+                    initial={{ opacity: 0, x: 34, scale: 0.96 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.15 }}
                 >
-                    <button
-                        onClick={onOrderClick}
-                        style={{
-                            padding: '1.2rem 3rem',
-                            fontSize: '1.2rem',
-                            backgroundColor: 'var(--color-secondary)',
-                            color: 'white',
-                            borderRadius: '50px',
-                            boxShadow: '0 10px 25px rgba(75, 54, 33, 0.25)',
-                            transition: 'all 0.3s ease',
-                            fontWeight: 'bold',
-                            letterSpacing: '0.5px'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.target.style.transform = 'translateY(-3px)';
-                            e.target.style.boxShadow = '0 15px 30px rgba(75, 54, 33, 0.35)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.target.style.transform = 'translateY(0)';
-                            e.target.style.boxShadow = '0 10px 25px rgba(75, 54, 33, 0.25)';
-                        }}
+                    <motion.div
+                        className="hero-product-card hero-product-card-front"
+                        animate={{ y: [0, -12, 0], rotate: [-2, 1, -2] }}
+                        transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
                     >
-                        Order Now
-                    </button>
-                    <button
-                        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-                        style={{
-                            padding: '1.2rem 3rem',
-                            fontSize: '1.2rem',
-                            backgroundColor: 'transparent',
-                            color: 'var(--color-secondary)',
-                            border: '2px solid var(--color-secondary)',
-                            borderRadius: '50px',
-                            fontWeight: '600',
-                            transition: 'all 0.3s ease',
-                            cursor: 'pointer'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.target.style.backgroundColor = 'var(--color-secondary)';
-                            e.target.style.color = 'white';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.target.style.backgroundColor = 'transparent';
-                            e.target.style.color = 'var(--color-secondary)';
-                        }}
+                        <img src={hingPackFront} alt="हींग-Aura product front pack" />
+                    </motion.div>
+                    <motion.div
+                        className="hero-product-card hero-product-card-back"
+                        animate={{ y: [0, 14, 0], rotate: [5, 2, 5] }}
+                        transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}
                     >
-                        Our Story
-                    </button>
+                        <img src={hingPackBack} alt="हींग-Aura product back pack" />
+                    </motion.div>
+                    <motion.div
+                        className="hero-badge"
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+                    >
+                        <BadgeCheck size={22} />
+                        Quality Checked
+                    </motion.div>
                 </motion.div>
             </div>
         </section>

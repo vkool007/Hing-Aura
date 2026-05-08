@@ -1,120 +1,75 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, ShoppingBag } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Menu, ShoppingBag, X } from 'lucide-react';
 import logo from '../assets/logo.png';
 import '../index.css';
+
+const navLinks = [
+    { name: 'Home', href: '#home' },
+    { name: 'About', href: '#about' },
+    { name: 'Products', href: '#products' },
+    { name: 'Contact', href: '#contact' },
+];
 
 const Navbar = ({ onOrderClick }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
+        const handleScroll = () => setScrolled(window.scrollY > 40);
+        handleScroll();
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Products', href: '#products' },
-        { name: 'Contact', href: '#contact' },
-    ];
+    const handleBookClick = () => {
+        setIsOpen(false);
+        onOrderClick();
+    };
 
     return (
-        <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 1000,
-            padding: '0.8rem 2rem',
-            transition: 'all 0.3s ease',
-            backgroundColor: scrolled ? 'rgba(255, 248, 225, 0.95)' : 'transparent',
-            boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.05)' : 'none',
-            backdropFilter: scrolled ? 'blur(10px)' : 'none',
-            borderBottom: scrolled ? '1px solid rgba(212, 175, 55, 0.2)' : 'none'
-        }}>
-            <div className="nav-container" style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                maxWidth: '1200px',
-                margin: '0 auto'
-            }}>
-                {/* Logo */}
-                <div className="logo" style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.8rem',
-                    cursor: 'pointer'
-                }}>
-                    <img src={logo} alt="हींग-Aura Logo" style={{ height: '50px', objectFit: 'contain' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block' }} />
-                    <span style={{
-                        fontFamily: 'var(--font-heading)',
-                        fontSize: '1.8rem',
-                        fontWeight: 'bold',
-                        color: 'var(--color-primary)',
-                        display: 'none'
-                    }}>
-                        हींग-Aura
-                    </span>
-                </div>
+        <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''}`}>
+            <div className="nav-container">
+                <a className="brand-link" href="#home" aria-label="हींग-Aura home">
+                    <img className="brand-logo" src={logo} alt="हींग-Aura logo" />
+                    <span className="brand-name">हींग-Aura</span>
+                </a>
 
-                {/* Desktop Menu */}
-                <div className="desktop-menu" style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                <div className="desktop-menu">
                     {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            style={{
-                                textDecoration: 'none',
-                                color: 'var(--color-secondary)',
-                                fontSize: '1.1rem',
-                                fontWeight: '500',
-                                transition: 'color 0.3s'
-                            }}
-                            onMouseEnter={(e) => e.target.style.color = 'var(--color-primary)'}
-                            onMouseLeave={(e) => e.target.style.color = 'var(--color-secondary)'}
-                        >
+                        <a className="nav-link" key={link.name} href={link.href}>
                             {link.name}
                         </a>
                     ))}
-                    <button
-                        onClick={onOrderClick}
-                        style={{
-                            backgroundColor: 'var(--color-secondary)',
-                            color: 'white',
-                            padding: '0.5rem 1.5rem',
-                            borderRadius: '50px',
-                            fontSize: '1rem',
-                            fontWeight: '600',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            transition: 'all 0.2s',
-                            boxShadow: '0 4px 10px rgba(75, 54, 33, 0.2)'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.target.style.backgroundColor = 'var(--color-primary)';
-                            e.target.style.transform = 'translateY(-2px)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.target.style.backgroundColor = 'var(--color-secondary)';
-                            e.target.style.transform = 'translateY(0)';
-                        }}
-                    >
+                    <button className="btn btn-primary nav-book-button" onClick={handleBookClick}>
                         <ShoppingBag size={18} />
                         Book Now
                     </button>
                 </div>
 
-                {/* Mobile Menu Toggle */}
-                <div className="mobile-toggle" style={{ display: 'none', cursor: 'pointer', color: 'var(--color-secondary)' }} onClick={() => setIsOpen(!isOpen)}>
-                    {isOpen ? <X size={28} /> : <Menu size={28} />}
-                </div>
+                <button
+                    className="mobile-toggle"
+                    type="button"
+                    aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                    aria-expanded={isOpen}
+                    onClick={() => setIsOpen((current) => !current)}
+                >
+                    {isOpen ? <X size={22} /> : <Menu size={22} />}
+                </button>
             </div>
+
+            {isOpen && (
+                <div className="mobile-menu">
+                    {navLinks.map((link) => (
+                        <a className="nav-link" key={link.name} href={link.href} onClick={() => setIsOpen(false)}>
+                            {link.name}
+                        </a>
+                    ))}
+                    <button className="btn btn-primary" onClick={handleBookClick}>
+                        <ShoppingBag size={18} />
+                        Book Now
+                    </button>
+                </div>
+            )}
         </nav>
     );
 };
