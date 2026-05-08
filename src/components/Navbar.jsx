@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ShoppingBag } from 'lucide-react';
+import logo from '../assets/logo.png';
 import '../index.css';
 
 const Navbar = ({ onOrderClick }) => {
@@ -49,7 +50,7 @@ const Navbar = ({ onOrderClick }) => {
                     gap: '0.8rem',
                     cursor: 'pointer'
                 }}>
-                    <img src="/src/assets/logo.png" alt="हींग-Aura Logo" style={{ height: '50px', objectFit: 'contain' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block' }} />
+                    <img src={logo} alt="हींग-Aura Logo" style={{ height: '50px', objectFit: 'contain' }} onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block' }} />
                     <span style={{
                         fontFamily: 'var(--font-heading)',
                         fontSize: '1.8rem',
@@ -105,7 +106,7 @@ const Navbar = ({ onOrderClick }) => {
                         }}
                     >
                         <ShoppingBag size={18} />
-                        Shop Now
+                        Book Now
                     </button>
                 </div>
 

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Plus, ShoppingBag } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
+import hingPackFront from '../assets/hing1.jpeg';
+import hingPackBack from '../assets/hing2.jpeg';
 
-const ProductCard = ({ title, weight, price, delay, image, onOrder }) => (
+const ProductCard = ({ title, price, delay, images, onOrder }) => (
     <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -22,14 +24,15 @@ const ProductCard = ({ title, weight, price, delay, image, onOrder }) => (
         }}
     >
         <div style={{
-            height: '280px',
+            minHeight: '360px',
             backgroundColor: '#fff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))',
+            alignItems: 'stretch',
             position: 'relative',
             overflow: 'hidden',
-            padding: '1rem'
+            gap: '1rem',
+            padding: '1.5rem'
         }}>
             {/* Background decoration in image area */}
             <div style={{
@@ -41,19 +44,23 @@ const ProductCard = ({ title, weight, price, delay, image, onOrder }) => (
                 left: '-25%'
             }}></div>
 
-            <motion.img
-                src={image}
-                alt={title}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-                style={{
-                    maxHeight: '100%',
-                    maxWidth: '100%',
-                    objectFit: 'contain',
-                    zIndex: 1,
-                    filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))'
-                }}
-            />
+            {images.map((image, index) => (
+                <motion.img
+                    key={image}
+                    src={image}
+                    alt={`${title} pack ${index + 1}`}
+                    whileHover={{ scale: 1.04 }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        minHeight: '300px',
+                        objectFit: 'contain',
+                        zIndex: 1,
+                        filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))'
+                    }}
+                />
+            ))}
         </div>
 
         <div style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -65,7 +72,7 @@ const ProductCard = ({ title, weight, price, delay, image, onOrder }) => (
                 {title}
             </h3>
             <p style={{ color: 'var(--color-text-muted)', marginBottom: '2rem', fontSize: '1rem' }}>
-                Premium हींग-Aura Asafoetida
+                Premium quality compounded Dana Heeng from हींग-Aura.
             </p>
 
             <div style={{
@@ -82,13 +89,14 @@ const ProductCard = ({ title, weight, price, delay, image, onOrder }) => (
                     ₹{price}
                 </div>
                 <button
-                    onClick={() => onOrder(title)}
+                    onClick={onOrder}
+                    aria-label="Book order on WhatsApp"
                     style={{
                         backgroundColor: 'var(--color-secondary)',
                         color: 'white',
-                        width: '50px',
+                        width: '56px',
                         height: '50px',
-                        borderRadius: '50%',
+                        borderRadius: '50px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -104,7 +112,7 @@ const ProductCard = ({ title, weight, price, delay, image, onOrder }) => (
                         e.currentTarget.style.backgroundColor = 'var(--color-secondary)';
                     }}
                 >
-                    <ShoppingBag size={22} />
+                    <MessageCircle size={22} />
                 </button>
             </div>
         </div>
@@ -113,9 +121,12 @@ const ProductCard = ({ title, weight, price, delay, image, onOrder }) => (
 
 const ProductShowcase = ({ onOrderClick }) => {
     const products = [
-        { title: 'Royal Hing', weight: '25g', price: 199, delay: 0, image: '/src/assets/royal_25g.png' },
-        { title: 'Premium Hing', weight: '50g', price: 349, delay: 0.2, image: '/src/assets/premium_50g.png' },
-        { title: 'Classic Hing', weight: '100g', price: 649, delay: 0.4, image: '/src/assets/classic_100g.png' },
+        {
+            title: 'Premium Quality Compounded “Dana Heeng”',
+            price: 340,
+            delay: 0,
+            images: [hingPackFront, hingPackBack],
+        },
     ];
 
     return (
@@ -140,7 +151,7 @@ const ProductShowcase = ({ onOrderClick }) => {
                                 marginBottom: '0.5rem'
                             }}
                         >
-                            Our Products
+                            Our Product
                         </motion.h2>
                         <motion.p
                             initial={{ opacity: 0, x: -20 }}
@@ -149,11 +160,11 @@ const ProductShowcase = ({ onOrderClick }) => {
                             transition={{ delay: 0.1 }}
                             style={{ color: 'var(--color-text-muted)', maxWidth: '500px', fontSize: '1.1rem' }}
                         >
-                            A unique blend of purity and taste. Choose according to your needs.
+                            Our current premium compounded Dana Heeng pack is available for booking on WhatsApp.
                         </motion.p>
                     </div>
                     <button
-                        onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                        onClick={onOrderClick}
                         style={{
                             padding: '1rem 2.5rem',
                             border: '1px solid var(--color-secondary)',
@@ -163,7 +174,7 @@ const ProductShowcase = ({ onOrderClick }) => {
                             background: 'transparent',
                             cursor: 'pointer'
                         }}>
-                        View All
+                        Book on WhatsApp
                     </button>
                 </div>
 
@@ -172,8 +183,8 @@ const ProductShowcase = ({ onOrderClick }) => {
                     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
                     gap: '2.5rem'
                 }}>
-                    {products.map((product, index) => (
-                        <ProductCard key={index} {...product} onOrder={onOrderClick} />
+                    {products.map((product) => (
+                        <ProductCard key={product.title} {...product} onOrder={onOrderClick} />
                     ))}
                 </div>
             </div>

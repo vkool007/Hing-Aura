@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
 import ProductShowcase from './components/ProductShowcase';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
-import OrderModal from './components/OrderModal';
 import './index.css';
 
-function App() {
-  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState('');
+const WHATSAPP_LINK = 'https://whatsapp.com/channel/0029Vb7CwKFLikgCUnbi681V';
 
-  const handleOrderClick = (productName = '') => {
-    setSelectedProduct(productName);
-    setIsOrderModalOpen(true);
+function App() {
+  const handleOrderClick = () => {
+    window.open(WHATSAPP_LINK, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -25,12 +21,6 @@ function App() {
       <ProductShowcase onOrderClick={handleOrderClick} />
       <Testimonials />
       <Footer />
-
-      <OrderModal
-        isOpen={isOrderModalOpen}
-        onClose={() => setIsOrderModalOpen(false)}
-        productName={selectedProduct}
-      />
     </div>
   );
 }
